@@ -8,9 +8,27 @@ var orm = {
             cb(data);
         });
     },
-    insertOne: (table, )
-}
+    insertOne: (table, col, val, cb) => {
+        var query = "INSERT INTO " + table + "(" + col.toString() + ") ";
+        query += "VALUES (" + printQ(val.length) + ")";
 
+        connection.query(query, (err, data) => {
+            if (err) throw err;
+
+            cb(data);
+        })
+    },
+    updateOne: (table, colVal, condition, cb) => {
+        var query = "UPDATE " + table + " SET " + objToSql(colVal);
+        query += " WHERE " + condition;
+
+        connection.query(query, (err, data) => {
+            if (err) throw err;
+
+            cb(data);
+        })
+    }
+}
 
 function objToSql(obj) {
     var arr = [];
@@ -28,3 +46,15 @@ function objToSql(obj) {
     return arr.toString();
 
 }
+
+function printQ(num) {
+    var arr = [];
+
+    for (let i = 0; i < num; i++){
+        arr.push("?");
+    }
+
+    return arr.toString();
+}
+
+module.exports = orm;
