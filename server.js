@@ -12,8 +12,8 @@ app.use(express.static(path.join(__dirname, "/app/public")));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-// app.enginer("handlebars", hdb({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
+app.engine("handlebars", hdb({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 app.use(routes);
 

@@ -8,9 +8,11 @@ router.get("/", (req, res) => {
         
         console.log({burgers: data})
 
-        // res.render("index", {burgers: data})
+        res.render("index", {burgers: data})
 
     })
 })
+
+
 
 module.exports = router;
