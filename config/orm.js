@@ -12,7 +12,7 @@ var orm = {
         var query = "INSERT INTO " + table + "(" + col.toString() + ") ";
         query += "VALUES (" + printQ(val.length) + ")";
 
-        connection.query(query, (err, data) => {
+        connection.query(query, val, (err, data) => {
             if (err) throw err;
 
             cb(data);
@@ -33,13 +33,13 @@ var orm = {
 function objToSql(obj) {
     var arr = [];
 
-    for (let key in obj) {
+    for (var key in obj) {
         var val = obj[key];
         if(Object.hasOwnProperty.call(obj, key)) {
             if (typeof val === "string" && val.indexOf(" ") >= 0) {
                 val = "'" + val + "'";
             }
-            arr.push(key + "=" + value);
+            arr.push(key + "=" + val);
         }
     }
 
