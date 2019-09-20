@@ -30,17 +30,11 @@ router.put("/api/burger/:id", (req, res) => {
     });
 })
 
-router.post("api/burger", (req, res) => {
-
-    burger.create(["name", "devoured"],
+router.post("/api/burger", (req, res) => {
+    console.log(req.body.name, req.body.devoured)
+    burger.create(["burger_name", "devoured"],
     [req.body.name, req.body.devoured], (result) => {
-        if (result.changedRows == 0) {
-            res.status(404);
-            res.end()
-        } else {
-            res.status(200);
-            res.end();
-        }
+        res.json({id: result.insertId});
     })
 })
 

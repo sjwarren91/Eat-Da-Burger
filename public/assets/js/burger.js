@@ -33,17 +33,17 @@ $(document).ready(function() {
         event.preventDefault();
         if($("#bu").val().trim()) {
             var burger = $("#bu").val().trim();
-            console.log(burger);
 
             var newBurger = {
                 name: burger,
-                devoured: false
+                devoured: 0
             }
 
             $.ajax("/api/burger", {
-                tpye: "POST",
+                type: "POST",
                 data: newBurger
-            }).then(() => {
+            }).then((result) => {
+                
                 console.log("burger created");
 
                 location.reload();
